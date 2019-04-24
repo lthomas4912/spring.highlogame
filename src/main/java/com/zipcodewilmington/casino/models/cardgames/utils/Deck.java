@@ -4,6 +4,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
@@ -63,5 +64,9 @@ public class Deck {
 
     public void setCardList(List<Card> cardList) {
         this.cardList = cardList;
+    }
+
+    public void shuffle() {
+        Collections.shuffle(this.cardList);
     }
 }

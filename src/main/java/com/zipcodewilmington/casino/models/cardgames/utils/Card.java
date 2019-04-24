@@ -45,6 +45,10 @@ public class Card {
     }
 
     public String toString() {
-        return getRank().name() + " of " + getSuit().name();
+        return getRank().name() + " of " + getSuit().getCardGraphic();
+    }
+
+    public boolean equals(Card card) {
+        return rank.equals(card.rank);
     }
 }

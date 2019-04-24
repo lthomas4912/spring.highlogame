@@ -2,6 +2,7 @@ package com.zipcodewilmington.casino.controllers.cardgames.highlo;
 
 import com.zipcodewilmington.casino.models.cardgames.highlo.HighLoGame;
 import com.zipcodewilmington.casino.models.cardgames.utils.Card;
+import com.zipcodewilmington.casino.models.cardgames.utils.HighLoResult;
 import com.zipcodewilmington.casino.services.cardgames.highlo.HighLoGameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,9 +10,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
-@Controller
-@RequestMapping(value = "games/highlo")
+
+@RestController
+@RequestMapping(value = "/games/highlo")
 public class HighLoGameController {
 
     private HighLoGameService service;//service is always Singleton,is a bean.
@@ -20,8 +25,6 @@ public class HighLoGameController {
     public HighLoGameController(HighLoGameService service) {
         this.service = service;
     }
-
-
 
 
     @PostMapping("/")
@@ -52,6 +55,11 @@ public class HighLoGameController {
     @PutMapping("/{id}/deal")
     public ResponseEntity<HighLoGame> dealCards(@PathVariable Long id) {
         return new ResponseEntity<>(service.dealCard(id), HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}/choice")
+    public ResponseEntity<HighLoResult> makeChoice(@PathVariable Long id, @RequestBody PlayerChoice[] choices) {
+        return new ResponseEntity<>(service.makeChoice(id, choices), HttpStatus.OK);
     }
 
 }

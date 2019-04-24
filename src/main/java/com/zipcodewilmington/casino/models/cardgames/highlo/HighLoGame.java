@@ -58,4 +58,11 @@ public class HighLoGame {
     public HighLoPlayer findById(Long accountId) {
         return null;
     }
+
+    public void addPlayer(HighLoPlayer player) {
+        if (playerList == null) {
+            playerList = new ArrayList<>();
+        }
+        playerList.add(player);
+    }
 }

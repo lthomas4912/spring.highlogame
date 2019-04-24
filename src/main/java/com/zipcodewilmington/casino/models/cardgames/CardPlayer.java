@@ -5,6 +5,8 @@ import com.zipcodewilmington.casino.models.Account;
 import com.zipcodewilmington.casino.models.cardgames.utils.Hand;
 
 import javax.persistence.*;
+import java.util.Arrays;
+import java.util.List;
 
 @MappedSuperclass
 public class CardPlayer {
@@ -50,5 +52,24 @@ public class CardPlayer {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public void setName(String name){
+        this.account.setName(name);
+    }
+
+    public String getName(){
+        return account.getName();
+    }
+
+    @Override
+    public String toString() {
+
+
+        return "CardPlayer{" +
+                "id=" + id +
+                ", hand=" + Arrays.toString(hand.getCardList().toArray()) +
+                ", account=" + account +
+                '}';
     }
 }
