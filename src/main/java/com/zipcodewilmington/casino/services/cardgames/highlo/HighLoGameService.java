@@ -34,7 +34,10 @@ public class HighLoGameService extends AbstractService<HighLoGame, Long> {
     }
 
     public HighLoGame create() {
-        return super.create(new HighLoGame());
+        HighLoGame game = new HighLoGame();
+        game.getDeck().shuffle();
+        super.create(game);
+        return game;
     }
 
     public HighLoGame dealCard(Long id) {
@@ -117,7 +120,6 @@ public class HighLoGameService extends AbstractService<HighLoGame, Long> {
 
     public HighLoResult makeChoice(Long gameId, PlayerChoice... choices) {
         HighLoGame game = repository.findById(gameId).get();
-        game.getDeck().shuffle();
         Card nextCard = game.getDeck().pop();
         Map<Long, String> choiceMap = Arrays.stream(choices)
                                         .collect(Collectors.toMap(PlayerChoice::getPlayerId,
